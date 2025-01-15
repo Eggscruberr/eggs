@@ -37,7 +37,7 @@ function Contact() {
           throw new Error('No channels found with the name Eggsino');
         }
   
-        const channelId = searchData.items[0].id.channelId;
+        const channelId = 'UCcAjkb1R8nG-9QWh2FxW47w'
   
         // Fetch channel statistics using the found channelId
         const channelResponse = await fetch(
