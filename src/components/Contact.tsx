@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Youtube } from 'lucide-react';
 
 interface YouTubeData {
@@ -20,46 +20,30 @@ function Contact() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Directly include the API key here (not recommended for production)
+  const YOUTUBE_API_KEY = 'AIzaSyDaY9LBmexX9T-Iet8S74VJGB0QNqOphog'; // Replace with your actual API key
+
   useEffect(() => {
     const fetchYouTubeData = async () => {
       try {
-        // Load API key from the environment variable
-        const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-
-        if (!apiKey) {
-          throw new Error('YouTube API key is missing in the environment.');
-        }
-
-        // Fetch channel data (subscribers)
+        // Fetch channel data
         const channelResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCYGxZWTgw_yQBXXCqLzw4Eg&key=${apiKey}`
+          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCYGxZWTgw_yQBXXCqLzw4Eg&key=${YOUTUBE_API_KEY}`
         );
-
-        if (!channelResponse.ok) {
-          throw new Error(`Failed to fetch channel data: ${channelResponse.status}`);
-        }
-
         const channelData = await channelResponse.json();
-
+        
         // Fetch latest videos
         const videosResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYGxZWTgw_yQBXXCqLzw4Eg&maxResults=3&order=date&type=video&key=${apiKey}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYGxZWTgw_yQBXXCqLzw4Eg&maxResults=3&order=date&type=video&key=${YOUTUBE_API_KEY}`
         );
-
-        if (!videosResponse.ok) {
-          throw new Error(`Failed to fetch videos: ${videosResponse.status}`);
-        }
-
         const videosData = await videosResponse.json();
 
-        // Format subscriber count
         const subCount = parseInt(channelData.items[0].statistics.subscriberCount);
         const formattedSubCount = new Intl.NumberFormat('en-US', {
           notation: 'compact',
           maximumFractionDigits: 1
         }).format(subCount);
 
-        // Format videos data
         const formattedVideos = videosData.items.map((item: any) => ({
           id: item.id.videoId,
           title: item.snippet.title,
@@ -80,7 +64,7 @@ function Contact() {
     };
 
     fetchYouTubeData();
-  }, []);
+  }, [YOUTUBE_API_KEY]);
 
   if (loading) {
     return (
@@ -117,7 +101,6 @@ function Contact() {
             <h2 className="text-2xl font-bold text-gray-100 mb-2">@Eggsino</h2>
             <p className="text-gray-300 mb-4">{youtubeData.subscriberCount} Subscribers</p>
             
-            {/* Animated Subscribe Button */}
             <a
               href="https://www.youtube.com/@Eggsino?sub_confirmation=1"
               target="_blank"
@@ -133,8 +116,7 @@ function Contact() {
               `}></div>
               <button className={`
                 relative px-8 py-3 bg-gradient-to-r from-red-600 to-red-700
-                text-white font-bold rounded-lg transition-transform duration-300
-                ${isHovered ? 'transform scale-105' : ''}
+                text-white font-bold
               `}>
                 SUBSCRIBE
               </button>
@@ -142,7 +124,7 @@ function Contact() {
           </div>
         </div>
 
-        {/* Latest Videos Grid */}
+        {/* Latest Videos */}
         <div className="mb-12">
           <h2 className="text-2xl font-bold text-gray-100 mb-6">Latest Videos</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
