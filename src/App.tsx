@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, Egg } from 'lucide-react';
 import Contact from './components/Contact';
-import SparkleButton from './sparklebutton';
 
 interface Product {
   id: number;
@@ -46,8 +45,8 @@ function Home() {
         </div>
       </div>
 
-{/* Winnerz Deal Block */}
-<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      {/* Winnerz Deal Block */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-center items-center animate__animated animate__fadeInUp animate__delay-1s">
           <div className="relative rounded-lg shadow-xl overflow-hidden transition-transform hover:scale-105 transform hover:translate-y-2 border-2 border-gray-700">
             <div className="aspect-w-16 aspect-h-9">
@@ -64,12 +63,11 @@ function Home() {
               <div className="flex justify-between items-center">
                 <span className="text-3xl font-bold text-yellow-400">{product.price}</span>
                 <button
-  onClick={handleClaimClick}
-  className={`inline-flex items-center px-6 py-3 border-0 text-sm font-medium rounded-md text-white transition-all transform ${buttonClicked ? 'animate-burst' : ''}`}
->
-  <SparkleButton />
-</button>
-
+                  onClick={handleClaimClick}
+                  className={`inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition-all transform ${buttonClicked ? 'animate-burst' : ''}`}
+                >
+                  Claim Deal
+                </button>
               </div>
             </div>
           </div>
