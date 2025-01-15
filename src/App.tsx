@@ -13,32 +13,14 @@ interface Product {
 }
 
 function Home() {
-  const products: Product[] = [
-    {
-      id: 1,
-      title: "Premium Wireless Headphones",
-      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
-      description: "Experience crystal clear sound with our premium wireless headphones. Perfect for music enthusiasts.",
-      price: "$199.99",
-      link: "#"
-    },
-    {
-      id: 2,
-      title: "Smart Fitness Watch",
-      image: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=800&q=80",
-      description: "Track your fitness goals with our advanced smartwatch. Features heart rate monitoring and GPS.",
-      price: "$149.99",
-      link: "#"
-    },
-    {
-      id: 3,
-      title: "Professional Camera Kit",
-      image: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
-      description: "Capture life's moments in stunning detail with our professional-grade camera kit.",
-      price: "$899.99",
-      link: "#"
-    }
-  ];
+  const product: Product = {
+    id: 1,
+    title: "Winnerz Deal",
+    image: "https://bonkku.com/wp-content/uploads/2023/02/winnerz-508.png",
+    description: "Exclusive offer for our valued customers. Don't miss out on this amazing deal!",
+    price: "",
+    link: "#"
+  };
 
   return (
     <>
@@ -46,41 +28,40 @@ function Home() {
       <div className="relative pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-6">
-            Exclusive Deals You Can't Miss
+            Exclusive Winnerz Deal You Can't Miss
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Level up ur game today!
+            Level up your game today with this exclusive deal!
           </p>
         </div>
       </div>
 
-      {/* Products Grid */}
+      {/* Winnerz Deal Block */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div key={product.id} className="bg-gray-800/50 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden transition-transform hover:scale-105 border border-gray-700">
-              <div className="aspect-w-16 aspect-h-9">
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-64 object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-100 mb-2">{product.title}</h3>
-                <p className="text-gray-300 mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-2xl font-bold text-blue-400">{product.price}</span>
-                  <a
-                    href={product.link}
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
-                  >
-                    Get Deal
-                  </a>
-                </div>
+        <div className="flex justify-center items-center animate__animated animate__fadeInUp animate__delay-1s">
+          <div className="relative rounded-lg shadow-xl overflow-hidden transition-transform hover:scale-105 transform hover:translate-y-2 border-2 border-gray-700">
+            <div className="aspect-w-16 aspect-h-9">
+              <img
+                src={product.image}
+                alt={product.title}
+                className="w-full h-64 object-cover transform transition-all duration-500 ease-in-out hover:scale-110"
+              />
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 opacity-30 animate-gradient-background"></div> {/* Gradient Animation */}
+            <div className="relative p-6 z-10">
+              <h3 className="text-2xl font-bold text-white mb-2">{product.title}</h3>
+              <p className="text-gray-200 mb-4">{product.description}</p>
+              <div className="flex justify-between items-center">
+                <span className="text-3xl font-bold text-yellow-400">{product.price}</span>
+                <a
+                  href={product.link}
+                  className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition-colors transform hover:scale-105"
+                >
+                  Claim Deal
+                </a>
               </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </>
