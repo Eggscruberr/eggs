@@ -23,16 +23,33 @@ function Contact() {
   useEffect(() => {
     const fetchYouTubeData = async () => {
       try {
-        // Fetch channel data
+        // Load API key from the environment variable
+        const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+
+        if (!apiKey) {
+          throw new Error('YouTube API key is missing in the environment.');
+        }
+
+        // Fetch channel data (subscribers)
         const channelResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCYGxZWTgw_yQBXXCqLzw4Eg&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCYGxZWTgw_yQBXXCqLzw4Eg&key=${apiKey}`
         );
+
+        if (!channelResponse.ok) {
+          throw new Error(`Failed to fetch channel data: ${channelResponse.status}`);
+        }
+
         const channelData = await channelResponse.json();
-        
+
         // Fetch latest videos
         const videosResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYGxZWTgw_yQBXXCqLzw4Eg&maxResults=3&order=date&type=video&key=${import.meta.env.VITE_YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYGxZWTgw_yQBXXCqLzw4Eg&maxResults=3&order=date&type=video&key=${apiKey}`
         );
+
+        if (!videosResponse.ok) {
+          throw new Error(`Failed to fetch videos: ${videosResponse.status}`);
+        }
+
         const videosData = await videosResponse.json();
 
         // Format subscriber count
