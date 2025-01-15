@@ -95,7 +95,7 @@ function App() {
               <div className="flex items-center">
                 <Link to="/" className="flex items-center">
                   <Egg className="h-8 w-8 text-blue-400" />
-                  <span className="ml-2 text-xl font-bold text-gray-100">Egg</span>
+                  <span className="ml-2 text-xl font-bold text-gray-100">Eggsino</span>
                 </Link>
               </div>
               
