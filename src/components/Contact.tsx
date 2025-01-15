@@ -31,29 +31,39 @@ function Contact() {
           `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCYGxZWTgw_yQBXXCqLzw4Eg&key=${YOUTUBE_API_KEY}`
         );
         const channelData = await channelResponse.json();
-        
+  
+        // Check if the 'items' array is present and has at least one item
+        if (!channelData.items || channelData.items.length === 0) {
+          throw new Error('No channel data found');
+        }
+  
         // Fetch latest videos
         const videosResponse = await fetch(
           `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYGxZWTgw_yQBXXCqLzw4Eg&maxResults=3&order=date&type=video&key=${YOUTUBE_API_KEY}`
         );
         const videosData = await videosResponse.json();
-
+  
+        // Check if 'items' array is present for videos as well
+        if (!videosData.items || videosData.items.length === 0) {
+          throw new Error('No videos found');
+        }
+  
         const subCount = parseInt(channelData.items[0].statistics.subscriberCount);
         const formattedSubCount = new Intl.NumberFormat('en-US', {
           notation: 'compact',
-          maximumFractionDigits: 1
+          maximumFractionDigits: 1,
         }).format(subCount);
-
+  
         const formattedVideos = videosData.items.map((item: any) => ({
           id: item.id.videoId,
           title: item.snippet.title,
           thumbnail: item.snippet.thumbnails.high.url,
-          videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`
+          videoUrl: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         }));
-
+  
         setYoutubeData({
           subscriberCount: formattedSubCount,
-          latestVideos: formattedVideos
+          latestVideos: formattedVideos,
         });
         setLoading(false);
       } catch (err) {
@@ -62,9 +72,10 @@ function Contact() {
         setLoading(false);
       }
     };
-
+  
     fetchYouTubeData();
   }, [YOUTUBE_API_KEY]);
+  
 
   if (loading) {
     return (
