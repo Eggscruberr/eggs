@@ -26,24 +26,35 @@ function Contact() {
   useEffect(() => {
     const fetchYouTubeData = async () => {
       try {
-        // Fetch channel data
+        // First search for the channel by name to get the correct channelId
+        const searchResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=Eggsino&key=${YOUTUBE_API_KEY}`
+        );
+        const searchData = await searchResponse.json();
+  
+        // If no channels found, throw an error
+        if (!searchData.items || searchData.items.length === 0) {
+          throw new Error('No channels found with the name Eggsino');
+        }
+  
+        const channelId = searchData.items[0].id.channelId;
+  
+        // Fetch channel statistics using the found channelId
         const channelResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=UCYGxZWTgw_yQBXXCqLzw4Eg&key=${YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`
         );
         const channelData = await channelResponse.json();
   
-        // Check if the 'items' array is present and has at least one item
         if (!channelData.items || channelData.items.length === 0) {
           throw new Error('No channel data found');
         }
   
-        // Fetch latest videos
+        // Fetch latest videos using the found channelId
         const videosResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=UCYGxZWTgw_yQBXXCqLzw4Eg&maxResults=3&order=date&type=video&key=${YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=3&order=date&type=video&key=${YOUTUBE_API_KEY}`
         );
         const videosData = await videosResponse.json();
   
-        // Check if 'items' array is present for videos as well
         if (!videosData.items || videosData.items.length === 0) {
           throw new Error('No videos found');
         }
@@ -75,6 +86,7 @@ function Contact() {
   
     fetchYouTubeData();
   }, [YOUTUBE_API_KEY]);
+  
   
 
   if (loading) {
