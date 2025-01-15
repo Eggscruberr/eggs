@@ -40,6 +40,8 @@
   }
 }
 
+
+
 /* Subscribe button glow animation */
 @keyframes glow {
   0% {
@@ -52,3 +54,4 @@
     box-shadow: 0 0 5px #ef4444, 0 0 10px #ef4444, 0 0 15px #ef4444;
   }
 }
+

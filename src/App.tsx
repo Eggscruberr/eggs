@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { Menu, X, Egg } from 'lucide-react';
 import Contact from './components/Contact';
+import SparkleButton from './sparklebutton';
 
 interface Product {
   id: number;
@@ -22,6 +23,15 @@ function Home() {
     link: "#"
   };
 
+  const [buttonClicked, setButtonClicked] = useState(false);
+
+  const handleClaimClick = () => {
+    setButtonClicked(true);
+    setTimeout(() => {
+      setButtonClicked(false); // Reset animation after 1 second
+    }, 1000); // Duration of the animation
+  };
+
   return (
     <>
       {/* Hero Section */}
@@ -36,8 +46,8 @@ function Home() {
         </div>
       </div>
 
-      {/* Winnerz Deal Block */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+{/* Winnerz Deal Block */}
+<div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="flex justify-center items-center animate__animated animate__fadeInUp animate__delay-1s">
           <div className="relative rounded-lg shadow-xl overflow-hidden transition-transform hover:scale-105 transform hover:translate-y-2 border-2 border-gray-700">
             <div className="aspect-w-16 aspect-h-9">
@@ -47,18 +57,19 @@ function Home() {
                 className="w-full h-64 object-cover transform transition-all duration-500 ease-in-out hover:scale-110"
               />
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 opacity-30 animate-gradient-background"></div> {/* Gradient Animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 opacity-30 animate-gradient-background"></div>
             <div className="relative p-6 z-10">
               <h3 className="text-2xl font-bold text-white mb-2">{product.title}</h3>
               <p className="text-gray-200 mb-4">{product.description}</p>
               <div className="flex justify-between items-center">
                 <span className="text-3xl font-bold text-yellow-400">{product.price}</span>
-                <a
-                  href={product.link}
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition-colors transform hover:scale-105"
-                >
-                  Claim Deal
-                </a>
+                <button
+  onClick={handleClaimClick}
+  className={`inline-flex items-center px-6 py-3 border-0 text-sm font-medium rounded-md text-white transition-all transform ${buttonClicked ? 'animate-burst' : ''}`}
+>
+  <SparkleButton />
+</button>
+
               </div>
             </div>
           </div>

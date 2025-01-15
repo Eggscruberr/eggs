@@ -1,0 +1,96 @@
+.sp {
+  position: relative;
+}
+
+.sparkle-button {
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  position: relative;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+  animation: sparkle 0.5s ease-in-out infinite;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: -1;
+}
+
+.sparkle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+}
+
+.bodydrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.particle-pen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.particle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #ff69b4;
+  border-radius: 50%;
+  animation: particle-animation 0.5s linear infinite;
+}
+
+@keyframes sparkle {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes particle-animation {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateX(0) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(10px) translateY(10px);
+  }
+}
