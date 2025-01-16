@@ -1,34 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X, Egg } from 'lucide-react';
+import { Menu, X, Egg, Copy } from 'lucide-react';
 import Contact from './components/Contact';
 
 interface Product {
   id: number;
   title: string;
   image: string;
-  description: string;
-  price: string;
-  link: string;
 }
 
 function Home() {
   const product: Product = {
     id: 1,
-    title: "Winnerz Deal",
-    image: "https://bonkku.com/wp-content/uploads/2023/02/winnerz-508.png",
-    description: "Exclusive offer for our valued customers. Don't miss out on this amazing deal!",
-    price: "",
-    link: "#"
+    title: "Winnerz",
+    image: "https://bonkku.com/wp-content/uploads/2023/02/winnerz-508.png"
   };
 
-  const [buttonClicked, setButtonClicked] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  const handleClaimClick = () => {
-    setButtonClicked(true);
-    setTimeout(() => {
-      setButtonClicked(false); // Reset animation after 1 second
-    }, 1000); // Duration of the animation
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText('');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -37,38 +30,57 @@ function Home() {
       <div className="relative pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-6">
-            Exclusive Winnerz Deal You Can't Miss
+            Level up your game today
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Level up your game today with this exclusive deal!
+            Upgrade your playstyle with these exciting offers!
           </p>
         </div>
       </div>
 
-      {/* Winnerz Deal Block */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="flex justify-center items-center animate__animated animate__fadeInUp animate__delay-1s">
-          <div className="relative rounded-lg shadow-xl overflow-hidden transition-transform hover:scale-105 transform hover:translate-y-2 border-2 border-gray-700">
-            <div className="aspect-w-16 aspect-h-9">
+      {/* Deal Block */}
+      <div className="relative max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="flex flex-col items-center animate__animated animate__fadeInUp animate__delay-1s">
+          <div className="w-full bg-[#1a1f2e] rounded-lg overflow-hidden border border-gray-700/50">
+            {/* Title Section with Image */}
+            <div className="relative text-center py-8 border-b border-gray-700/50 bg-gradient-to-b from-[#1a1f2e] via-[#232936] to-[#1a1f2e]">
+              {/* Radial glow effect */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,215,0,0.03)_0%,transparent_70%)] pointer-events-none"></div>
+              {/* Diagonal lines pattern */}
+              <div className="absolute inset-0 opacity-5" 
+                   style={{
+                     backgroundImage: 'linear-gradient(45deg, #ffd700 1px, transparent 1px)',
+                     backgroundSize: '30px 30px'
+                   }}></div>
               <img
                 src={product.image}
                 alt={product.title}
-                className="w-full h-64 object-cover transform transition-all duration-500 ease-in-out hover:scale-110"
+                className="w-48 mx-auto mb-4 transform transition-all duration-500 ease-in-out hover:scale-105 relative z-10"
               />
+              <h2 className="text-2xl font-bold relative z-10">
+                <span className="text-[#ffd700]">WINNERZ</span>
+              </h2>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 opacity-30 animate-gradient-background"></div>
-            <div className="relative p-6 z-10">
-              <h3 className="text-2xl font-bold text-white mb-2">{product.title}</h3>
-              <p className="text-gray-200 mb-4">{product.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-3xl font-bold text-yellow-400">{product.price}</span>
-                <button
-                  onClick={handleClaimClick}
-                  className={`inline-flex items-center px-6 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-yellow-500 hover:bg-yellow-600 transition-all transform ${buttonClicked ? 'animate-burst' : ''}`}
-                >
-                  Claim Deal
-                </button>
+            
+            {/* Code Section */}
+            <div className="p-6">
+              <div className="flex items-center justify-between bg-[#131722] rounded p-4 border border-gray-700/30">
+                <div className="text-gray-400">Code:</div>
+                <div className="flex items-center space-x-3">
+                  <span className="text-gray-300 font-mono"></span>
+                  <button
+                    onClick={handleCopyClick}
+                    className="text-gray-400 hover:text-[#ffd700] transition-colors"
+                  >
+                    <Copy className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
+              {copied && (
+                <div className="text-center text-sm text-green-500 mt-2">
+                  Code copied to clipboard!
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -145,6 +157,27 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+
+        {/* Footer */}
+        <footer className="bg-gray-900/80 backdrop-blur-lg border-t border-gray-700 py-8 px-4">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center text-gray-400 space-y-4">
+              <div className="flex flex-wrap justify-center gap-4 text-sm">
+                <span>18+</span>
+                <span>|</span>
+                <span>Gamble Responsibly</span>
+                <span>|</span>
+                <a href="https://www.begambleaware.org/" target="_blank" rel="noopener noreferrer" 
+                   className="text-blue-400 hover:text-blue-300">BeGambleAware</a>
+              </div>
+              <div className="max-w-2xl mx-auto text-sm">
+                <p className="mb-2">Most people gamble for fun and enjoyment. Do not think of gambling as a way to make money.</p>
+                <p className="mb-2">Only gamble with money you can afford to lose. Set a money and time limit in advance.</p>
+                <p>Never chase your losses. Don't use gambling to distract yourself from everyday problems.</p>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     </Router>
   );

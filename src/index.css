@@ -5,11 +5,11 @@
 .animated-bg {
   background: linear-gradient(
     125deg,
-    #1a1a2e 0%,
-    #16213e 25%,
-    #1a1a2e 50%,
-    #16213e 75%,
-    #1a1a2e 100%
+    #131722 0%,
+    #1a1f2e 25%,
+    #131722 50%,
+    #1a1f2e 75%,
+    #131722 100%
   );
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
@@ -40,8 +40,6 @@
   }
 }
 
-
-
 /* Subscribe button glow animation */
 @keyframes glow {
   0% {
@@ -54,4 +52,3 @@
     box-shadow: 0 0 5px #ef4444, 0 0 10px #ef4444, 0 0 15px #ef4444;
   }
 }
-
