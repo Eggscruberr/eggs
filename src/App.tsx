@@ -12,8 +12,8 @@ interface Product {
 function Home() {
   const product: Product = {
     id: 1,
-    title: "Winnerz",
-    image: "https://bonkku.com/wp-content/uploads/2023/02/winnerz-508.png"
+    title: "Goldenbet",
+    image: "https://static.casino.guru/pict/190654/4163_500x500_dark1.png?timestamp=1693806952000&imageDataId=597616"
   };
 
   const [copied, setCopied] = useState(false);
@@ -58,29 +58,23 @@ function Home() {
                 className="w-48 mx-auto mb-4 transform transition-all duration-500 ease-in-out hover:scale-105 relative z-10"
               />
               <h2 className="text-2xl font-bold relative z-10">
-                <span className="text-[#ffd700]">WINNERZ</span>
+                <span className="text-[#ffd700]">Latest Welcome Bonus</span>
               </h2>
             </div>
             
             {/* Code Section */}
             <div className="p-6">
-              <div className="flex items-center justify-between bg-[#131722] rounded p-4 border border-gray-700/30">
-                <div className="text-gray-400">Code:</div>
-                <div className="flex items-center space-x-3">
-                  <span className="text-gray-300 font-mono"></span>
-                  <button
-                    onClick={handleCopyClick}
-                    className="text-gray-400 hover:text-[#ffd700] transition-colors"
-                  >
-                    <Copy className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-              {copied && (
-                <div className="text-center text-sm text-green-500 mt-2">
-                  Code copied to clipboard!
-                </div>
-              )}
+            <div className="p-6">
+              <a
+                href="https://go.affision.com/visit/?bta=43898&brand=goldenbet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-gradient-to-r from-[#ffd700] to-[#ffb700] text-gray-900 font-bold py-3 px-6 rounded-lg transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:from-[#ffb700] hover:to-[#ffd700]"
+              >
+                Register
+              </a>
+            </div>
+            
             </div>
           </div>
         </div>
