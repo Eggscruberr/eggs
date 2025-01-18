@@ -28,7 +28,7 @@ function Contact() {
       try {
         // First search for the channel by name to get the correct channelId
         const searchResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=Eggsino&key=${YOUTUBE_API_KEY}`
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&type=channel&q=Eggsinos&key=${YOUTUBE_API_KEY}`
         );
         const searchData = await searchResponse.json();
   
@@ -37,7 +37,7 @@ function Contact() {
           throw new Error('No channels found with the name Eggsino');
         }
   
-        const channelId = 'UCcAjkb1R8nG-9QWh2FxW47w'
+        const channelId = 'UCQtYyLOR3R04umHKqYfQMhw'
   
         // Fetch channel statistics using the found channelId
         const channelResponse = await fetch(
