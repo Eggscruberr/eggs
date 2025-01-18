@@ -121,11 +121,11 @@ function Contact() {
         <div className="bg-gray-800/50 backdrop-blur-sm rounded-lg p-8 mb-12 text-center relative overflow-hidden border border-gray-700">
           <div className="relative z-10">
             <Youtube className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-100 mb-2">@Eggsino</h2>
+            <h2 className="text-2xl font-bold text-gray-100 mb-2">@Eggsinos</h2>
             <p className="text-gray-300 mb-4">{youtubeData.subscriberCount} Subscribers</p>
             
             <a
-              href="https://www.youtube.com/@Eggsino?sub_confirmation=1"
+              href="https://www.youtube.com/@Eggsinos?sub_confirmation=1"
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline-block group"
